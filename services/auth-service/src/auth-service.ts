@@ -53,17 +53,62 @@ export class AuthService {
 		);
 
 		const expiresAt = new Date();
-        expiresAt.setDate(expiresAt.getDate() + 7);
+		expiresAt.setDate(expiresAt.getDate() + 7);
 
-        await prisma.refreshToken.create({
-            data: {
-                userId,
-                token: refreshToken,
-                expiresAt,
-            },
-        })
+		await prisma.refreshToken.create({
+			data: {
+				userId,
+				token: refreshToken,
+				expiresAt,
+			},
+		});
 
-        return {
+		return {
+			accessToken,
+			refreshToken,
+		};
+	}
+
+	private async generateTokens(
+		userId: string,
+		email: string
+	): Promise<AuthTokens> {
+		const payload = { userId, email };
+
+		// Generate access token
+		const accessTokenOptions: SignOptions = {
+			expiresIn: this.jwtExpiresIn as StringValue,
+		};
+
+		const accessToken = jwt.sign(
+			payload,
+			this.jwtSecret,
+			accessTokenOptions
+		) as string;
+
+		// Generate refresh token
+		const refreshTokenOptions: SignOptions = {
+			expiresIn: this.jwtRefreshExpiresIn as StringValue,
+		};
+		const refreshToken = jwt.sign(
+			payload,
+			this.jwtRefreshSecret,
+			refreshTokenOptions
+		) as string;
+
+		// Store refresh token in the database
+		const expiresAt = new Date();
+		expiresAt.setDate(expiresAt.getDate() + 7); // 7 days from now
+
+		await prisma.refreshToken.create({
+			data: {
+				userId,
+				token: refreshToken,
+				expiresAt,
+			},
+		});
+
+		return {
 			accessToken,
 			refreshToken,
 		};
@@ -90,5 +135,22 @@ export class AuthService {
 		});
 
 		return this.generateAuthTokens(user.id, user.email);
+	}
+
+	async login(email: string, password: string): Promise<AuthTokens> {
+		const user = await prisma.user.findUnique({
+			where: { email },
+		});
+
+		if (!user) {
+			throw createServiceError("Invalid email or password", 401);
+		}
+
+		const isPasswordValid = await bcrypt.compare(password, user.password);
+		if (!isPasswordValid) {
+			throw createServiceError("Invalid email or password", 401);
+		}
+
+		return this.generateTokens(user.id, user.email);
 	}
 }
