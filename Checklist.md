@@ -41,31 +41,31 @@
 - [x] Create Client instance in `lib/auth-client.ts`
 
 ### Email & Password Authentication
-- [ ] Enable Email & Password Authentication
-- [ ] Create Sign Up Page PT1
-  - [ ] Create Form `components/register-form.tsx`
-  - [ ] Log Form Values
-- [ ] Setup Sonner
-- [ ] Create Sign Up Page PT2
-  - [ ] Add Form Validation
-  - [ ] Destructure SignUp Function
-  - [ ] Showcase `onError`
-- [ ] OPTIONS - **minPasswordLength**
-- [ ] Create Sign Up Page PT3
-  - [ ] Sign Up _default automatically signs in the user_
-- [ ] Show Session on Profile Page
-- [ ] Show Data in Neon Dashboard
-- [ ] Sign Out User
-  - [ ] Destructure SignOut Function
-  - [ ] Show Removed Cookies
-- [ ] Create Sign In Page PT1
-  - [ ] Create Form `components/login-form.tsx`
-  - [ ] Log Form Values
-  - [ ] Destructure SignIn Function
-- [ ] Show Unauthorized on Profile Page
-- [ ] Create Sign In Page PT2
-  - [ ] Showcase `onError`
-  - [ ] Sign In User
+- [x] Enable Email & Password Authentication
+- [x] Create Sign Up Page PT1
+  - [x] Create Form `components/register-form.tsx`
+  - [x] Log Form Values
+- [x] Setup Sonner
+- [x] Create Sign Up Page PT2
+  - [x] Add Form Validation
+  - [x] Destructure SignUp Function
+  - [x] Showcase `onError`
+- [x] OPTIONS - **minPasswordLength**
+- [x] Create Sign Up Page PT3
+  - [x] Sign Up _default automatically signs in the user_
+- [x] Show Session on Profile Page
+- [x] Show Data in Neon Dashboard
+- [x] Sign Out User
+  - [x] Destructure SignOut Function
+  - [x] Show Removed Cookies
+- [x] Create Sign In Page PT1
+  - [x] Create Form `components/login-form.tsx`
+  - [x] Log Form Values
+  - [x] Destructure SignIn Function
+- [x] Show Unauthorized on Profile Page
+- [x] Create Sign In Page PT2
+  - [x] Showcase `onError`
+  - [x] Sign In User
 
 ---
 
