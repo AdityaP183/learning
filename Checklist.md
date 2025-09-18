@@ -26,19 +26,19 @@
 - [x] Adjust **scripts** in `package.json`
 
 ### Authentication Configuration
-- [ ] Create single Prisma Client in `lib/prisma.ts`
-- [ ] Setup prisma adapter with better-auth
-- [ ] Generate auth tables `npx @better-auth/cli generate --output=auth.schema.prisma`
-- [ ] Make tweaks to `schema.prisma`
-- [ ] Quick walkthrough the models:
-  - [ ] `User`
-  - [ ] `Session`
-  - [ ] `Account`
-  - [ ] `Verification`
-- [ ] Push database changes `npx prisma db push`
-- [ ] Create Mount Handler in `app/api/auth/[...all]/route.ts`
-- [ ] Adjust `eslint.config.mjs` to ignore `/src/generated/**/*`
-- [ ] Create Client instance in `lib/auth-client.ts`
+- [x] Create single Prisma Client in `lib/prisma.ts`
+- [x] Setup prisma adapter with better-auth
+- [x] Generate auth tables `npx @better-auth/cli generate --output=auth.schema.prisma`
+- [x] Make tweaks to `schema.prisma`
+- [x] Quick walkthrough the models:
+  - [x] `User`
+  - [x] `Session`
+  - [x] `Account`
+  - [x] `Verification`
+- [x] Push database changes `npx prisma db push`
+- [x] Create Mount Handler in `app/api/auth/[...all]/route.ts`
+- [x] Adjust `eslint.config.mjs` to ignore `/src/generated/**/*`
+- [x] Create Client instance in `lib/auth-client.ts`
 
 ### Email & Password Authentication
 - [ ] Enable Email & Password Authentication
