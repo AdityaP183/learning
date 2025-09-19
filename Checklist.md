@@ -72,28 +72,19 @@
 ## PART 2: Advanced Configuration & Server Actions
 
 ### Advanced Features
-- [ ] Showcase `onRequest` and `onResponse`
-- [ ] Showcase Full Cycle Again
-- [ ] Add Convenience Links for Auth Pages
-- [ ] OPTIONS - **autoSignIn**
-  - [ ] Showcase
-- [ ] OPTIONS - **advanced.database.generateId**
-  - [ ] Table IDs (change `schema.prisma` and push)
-  - [ ] Showcase
-  - [ ] Truncate Tables
-- [ ] OPTIONS - **emailAndPassword.password**
-  - [ ] Create User
-  - [ ] Argon2 `npm install @node-rs/argon2`
-  - [ ] Add to `next.config.ts`
-  - [ ] Create Utilities `lib/argon2.ts`
-  - [ ] Add to `lib/auth.ts`
-  - [ ] Showcase
-  - [ ] Truncate Tables
-- [ ] Create User
-- [ ] Sign Up User via SERVER ACTIONS
-  - [ ] Create Action
-  - [ ] Log Form Values
-  - [ ] Sign Up User on Server
+- [x] Showcase `onRequest` and `onResponse`
+- [x] Showcase Full Cycle Again
+- [x] Add Convenience Links for Auth Pages
+- [x] OPTIONS - **autoSignIn**
+  - [x] Showcase
+- [x] OPTIONS - **advanced.database.generateId**
+  - [x] Table IDs (change `schema.prisma` and push)
+  - [x] Showcase
+  - [x] Truncate Tables
+- [x] Sign Up User via SERVER ACTIONS
+  - [x] Create Action
+  - [x] Log Form Values
+  - [x] Sign Up User on Server
 - [ ] Sign In User via SERVER ACTIONS
   - [ ] Create Action
   - [ ] Log Form Values
@@ -103,8 +94,6 @@
   - [ ] Showcase - Cookies
   - [ ] Passing Headers to Sign In
 - [ ] PLUGINS - **nextCookies()**
-
-**PART 2 STATUS: IN PROGRESS 🟡**
 
 ---
 
@@ -125,8 +114,6 @@
 - [ ] Hooks
   - [ ] Validate Email
   - [ ] Transform Name
-
-**PART 3 STATUS: NOT STARTED 🔴**
 
 ---
 
@@ -168,8 +155,6 @@
   - [ ] Change Permissions (With Posts)
 - [ ] Create Dropdown to Change Role for Admins
 
-**PART 4 STATUS: NOT STARTED 🔴**
-
 ---
 
 ## PART 5: OAuth & Social Logins
@@ -180,8 +165,6 @@
 - [ ] Account Linking
 - [ ] Error Handling
   - [ ] `/auth/login/error`
-
-**PART 5 STATUS: NOT STARTED 🔴**
 
 ---
 
@@ -203,8 +186,6 @@
   - [ ] Page / Form / Success
   - [ ] Showcase
 
-**PART 6 STATUS: NOT STARTED 🔴**
-
 ---
 
 ## PART 7: Advanced Features & Customization
@@ -221,16 +202,5 @@
   - [ ] Create UI
   - [ ] adjust hooks
 - [ ] Cookie Cache
-
-**PART 7 STATUS: NOT STARTED 🔴**
-
----
-
-## Overall Progress: 25% Complete ✅🟡🔴
-
-**Legend:**
-- ✅ Completed
-- 🟡 In Progress
-- 🔴 Not Started
 
 ---
