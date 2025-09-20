@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { signInEmailAction } from "@/actions/sign-in-email.action";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signIn } from "@/lib/auth-client";
 
 export default function LoginForm() {
 	const [isPending, setIsPending] = useState(false);
@@ -17,30 +17,15 @@ export default function LoginForm() {
 
 		const formData = new FormData(evt.currentTarget);
 
-		const email = String(formData.get("email"));
-		if (!email) return toast.error("Email is required");
+		const { error } = await signInEmailAction(formData);
 
-		const password = String(formData.get("password"));
-		if (!password) return toast.error("Password is required");
-
-		await signIn.email(
-			{ email, password },
-			{
-				onRequest: () => {
-					setIsPending(true);
-				},
-				onResponse: () => {
-					setIsPending(false);
-				},
-				onError: (ctx) => {
-					toast.error(ctx.error.message);
-				},
-				onSuccess: () => {
-					router.push("/profile");
-					toast.success("Logged in successfully");
-				},
-			},
-		);
+		if (error) {
+			toast.error(error);
+			setIsPending(false);
+		} else {
+			toast.success("Login successful. Good to have you back.");
+			router.push("/profile");
+		}
 	}
 
 	return (

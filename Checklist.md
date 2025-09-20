@@ -85,15 +85,13 @@
   - [x] Create Action
   - [x] Log Form Values
   - [x] Sign Up User on Server
-- [ ] Sign In User via SERVER ACTIONS
-  - [ ] Create Action
-  - [ ] Log Form Values
-  - [ ] Sign In User on Server
-  - [ ] Showcase - No Cookies
-  - [ ] Manually Set Cookies
-  - [ ] Showcase - Cookies
-  - [ ] Passing Headers to Sign In
-- [ ] PLUGINS - **nextCookies()**
+- [x] Sign In User via SERVER ACTIONS
+  - [x] Create Action
+  - [x] Log Form Values
+  - [x] Sign In User on Server
+  - [x] Manually Set Cookies
+  - [x] Passing Headers to Sign In
+- [x] PLUGINS - **nextCookies()**
 
 ---
 
