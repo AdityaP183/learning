@@ -97,21 +97,16 @@
 
 ## PART 3: Session Management & Middleware
 
-- [ ] Get Session on Client
-  - [ ] Create Get Started Button
-  - [ ] Destructure useSession
-  - [ ] Showcase
-- [ ] OPTIONS - **session.expiresIn**
-  - [ ] Change to 15 seconds
-  - [ ] Showcase
-  - [ ] Change to 30 days
-- [ ] Middleware
-  - [ ] check for existence of a session cookie
-  - [ ] showcase on auth routes
-- [ ] Error Handling
-- [ ] Hooks
-  - [ ] Validate Email
-  - [ ] Transform Name
+- [x] Get Session on Client
+  - [x] Create Get Started Button
+  - [x] Destructure useSession
+- [x] Middleware
+  - [x] check for existence of a session cookie
+  - [x] showcase on auth routes
+- [x] Error Handling
+- [x] Hooks
+  - [x] Validate Email
+  - [x] Transform Name
 
 ---
 
