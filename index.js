@@ -1,8 +1,12 @@
 import Fastify from "fastify";
 
+import userRouter from "./src/routes/user.js";
+
 const fastify = new Fastify({
 	logger: true,
 });
+
+fastify.register(userRouter);
 
 fastify.get("/", function (request, reply) {
 	reply.send({ status: "ok", message: "Server is running" });
