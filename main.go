@@ -3,7 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	res1 := CalculateCost(37)
-	res2 := CalculateCost(21)
-	fmt.Println(res1, res2)
+	res1 := DNAStrand("ATTGC")
+	res2 := DNAStrand("GTAT")
+	fmt.Println(res1)
+	fmt.Println(res2)
 }
