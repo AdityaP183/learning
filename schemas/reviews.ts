@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod/v3";
 
 export const ReviewSchema = z.object({
 	review: z.string().min(1),
