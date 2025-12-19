@@ -4,6 +4,9 @@ import { initializeRedis } from "../client.js";
 import type { Restaurant } from "../schemas/restaurants.js";
 import type { Review } from "../schemas/reviews.js";
 import {
+	cuisineKey,
+	cuisinesKey,
+	restaurantCuisineKeyById,
 	restaurantKeyById,
 	reviewDetailsKeyById,
 	reviewKeyById,
@@ -21,9 +24,16 @@ export const createRestaurant = async (req: Request, res: Response) => {
 		name: data.name,
 		location: data.location,
 	};
-	const addResult = await client.hSet(restaurantKey, hashData);
-
-	console.log("Added: ", addResult);
+	await Promise.all([
+		...data.cuisines.map((cuisine) =>
+			Promise.all([
+				client.sAdd(cuisinesKey, cuisine),
+				client.sAdd(cuisineKey(cuisine), id),
+				client.sAdd(restaurantCuisineKeyById(id), cuisine),
+			])
+		),
+		client.hSet(restaurantKey, hashData),
+	]);
 
 	return successResponse(res, hashData, "Added new restaurant");
 };
@@ -46,12 +56,13 @@ export const getRestaurantById = async (
 	const client = await initializeRedis();
 	const restaurantKey = restaurantKeyById(restaurantId);
 
-	const [_, restaurant] = await Promise.all([
+	const [_, restaurant, cuisines] = await Promise.all([
 		client.hIncrBy(restaurantKey, "viewCount", 1),
 		client.hGetAll(restaurantKey),
+		client.sMembers(restaurantCuisineKeyById(restaurantId)),
 	]);
 
-	return successResponse(res, restaurant);
+	return successResponse(res, { ...restaurant, cuisines });
 };
 
 export const createRestaurantReview = async (
