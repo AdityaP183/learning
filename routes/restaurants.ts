@@ -6,6 +6,7 @@ import {
 	getRestaurantById,
 	getRestaurantReviews,
 	getRestaurants,
+	getRestaurantWeather,
 } from "../controllers/restaurants.js";
 import { checkRestaurantExists } from "../middlewares/checkRestaurantId.js";
 import { validate } from "../middlewares/validate.js";
@@ -16,6 +17,11 @@ const router = Router();
 
 router.post("/", validate(RestaurantSchema), createRestaurant);
 router.get("/", getRestaurants);
+router.get(
+	"/:restaurantId/weather",
+	checkRestaurantExists,
+	getRestaurantWeather
+);
 router.post(
 	"/:restaurantId/reviews",
 	checkRestaurantExists,

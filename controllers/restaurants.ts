@@ -11,6 +11,7 @@ import {
 	restaurantsByRatingKey,
 	reviewDetailsKeyById,
 	reviewKeyById,
+	weatherKeyById,
 } from "../utils/keys.js";
 import { errorResponse, successResponse } from "../utils/responses.js";
 
@@ -167,4 +168,43 @@ export const deleteRestaurantReview = async (
 	}
 
 	return successResponse(res, reviewId, "Review deleted");
+};
+
+export const getRestaurantWeather = async (
+	req: Request<{
+		restaurantId: string;
+	}>,
+	res: Response
+) => {
+	const { restaurantId } = req.params;
+
+	const client = await initializeRedis();
+
+	const weatherKey = weatherKeyById(restaurantId);
+
+	const cachedWeather = await client.get(weatherKey);
+	if (cachedWeather) {
+		console.log("Weather data cache hit");
+		return successResponse(res, JSON.parse(cachedWeather));
+	}
+
+	const restaurantKey = restaurantKeyById(restaurantId);
+	const coords = await client.hGet(restaurantKey, "location");
+
+	if (!coords) {
+		return errorResponse(res, 404, "Coordinates have not been found!");
+	}
+
+	const [lng, lat] = coords.split(",");
+	const url = `https://api.openweathermap.org/data/2.5/weather?units=imperial&lat=${lat}&lon=${lng}&appid=${process.env.OPEN_WEATHER_API_KEY}`;
+
+	const apiResponse = await fetch(url);
+	if (apiResponse.status === 200) {
+		const json = await apiResponse.json();
+		await client.set(weatherKey, JSON.stringify(json), {
+			expiration: { type: "EX", value: 60 * 60 },
+		});
+		return successResponse(res, json);
+	}
+	return errorResponse(res, 500, "Couldn't fetch weather info!");
 };
