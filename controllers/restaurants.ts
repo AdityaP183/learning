@@ -8,6 +8,7 @@ import {
 	cuisinesKey,
 	restaurantCuisineKeyById,
 	restaurantKeyById,
+	restaurantsByRatingKey,
 	reviewDetailsKeyById,
 	reviewKeyById,
 } from "../utils/keys.js";
@@ -33,16 +34,31 @@ export const createRestaurant = async (req: Request, res: Response) => {
 			])
 		),
 		client.hSet(restaurantKey, hashData),
+		client.zAdd(restaurantsByRatingKey, {
+			score: 0,
+			value: id,
+		}),
 	]);
 
 	return successResponse(res, hashData, "Added new restaurant");
 };
 
 export const getRestaurants = async (req: Request, res: Response) => {
+	const { page = 1, limit = 10 } = req.query;
+	const start = (Number(page) - 1) * Number(limit);
+	const end = start + Number(limit);
+
 	const client = await initializeRedis();
-	const keys = await client.keys("redis:restaurants:*");
+	const restaurantIds = await client.zRange(
+		restaurantsByRatingKey,
+		start,
+		end,
+		{
+			REV: true,
+		}
+	);
 	const restaurants = await Promise.all(
-		keys.map(async (key) => client.hGetAll(key))
+		restaurantIds.map((id) => client.hGetAll(restaurantKeyById(id)))
 	);
 	return successResponse(res, restaurants);
 };
@@ -77,6 +93,7 @@ export const createRestaurantReview = async (
 	const reviewId = nanoid();
 	const reviewKey = reviewKeyById(restaurantId);
 	const reviewDetailsKey = reviewDetailsKeyById(reviewId);
+	const restaurantKey = restaurantKeyById(restaurantId);
 
 	const reviewData = {
 		id: reviewId,
@@ -85,9 +102,21 @@ export const createRestaurantReview = async (
 		restaurantId,
 	};
 
-	await Promise.all([
+	const [reviewCount, _, totalStars] = await Promise.all([
 		client.lPush(reviewKey, reviewId),
 		client.hSet(reviewDetailsKey, reviewData),
+		client.hIncrByFloat(restaurantKey, "totalStars", data.rating),
+	]);
+
+	const averageRating = Number(
+		(parseFloat(totalStars) / reviewCount).toFixed(1)
+	);
+	await Promise.all([
+		client.zAdd(restaurantsByRatingKey, {
+			score: averageRating,
+			value: restaurantId,
+		}),
+		client.hSet(restaurantKey, "avgStars", averageRating),
 	]);
 
 	return successResponse(res, reviewData, "Added new review");
