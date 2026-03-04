@@ -1,4 +1,4 @@
-package main
+package exercism
 
 import (
 	"strings"
@@ -15,7 +15,7 @@ func Duplicate_count(s1 string) int {
 
 	duplicates := 0
 	for _, count := range counts {
-		if count > 1{
+		if count > 1 {
 			duplicates++
 		}
 	}

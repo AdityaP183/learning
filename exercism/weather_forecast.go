@@ -1,6 +1,4 @@
-// Package weather provides simple utilities for storing and
-// reporting the current weather conditions of a given location.
-package main
+package exercism
 
 // CurrentCondition holds the latest reported weather condition
 // (e.g., "sunny", "rainy", "cloudy").

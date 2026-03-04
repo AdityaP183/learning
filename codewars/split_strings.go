@@ -1,4 +1,4 @@
-package main
+package codewars
 
 func Solution(str string) []string {
 	var chunks []string

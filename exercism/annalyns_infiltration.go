@@ -1,4 +1,4 @@
-package main
+package exercism
 
 // CanFastAttack can be executed only when the knight is sleeping.
 func CanFastAttack(knightIsAwake bool) bool {
@@ -19,8 +19,8 @@ func CanSignalPrisoner(archerIsAwake, prisonerIsAwake bool) bool {
 // or if Annalyn's pet dog is with her and the archer is sleeping.
 func CanFreePrisoner(knightIsAwake, archerIsAwake, prisonerIsAwake, petDogIsPresent bool) bool {
 	if petDogIsPresent {
-		return  !archerIsAwake
+		return !archerIsAwake
 	} else {
-		return  prisonerIsAwake && !knightIsAwake && !archerIsAwake
+		return prisonerIsAwake && !knightIsAwake && !archerIsAwake
 	}
 }

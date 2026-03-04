@@ -1,4 +1,5 @@
-package main
+package codewars
+
 
 func MoveZeros(arr []int) []int {
 	var sorted_arr []int

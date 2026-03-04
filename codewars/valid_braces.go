@@ -1,4 +1,4 @@
-package main
+package codewars
 
 func ValidBraces(str string) bool {
 	stack := []rune{}
