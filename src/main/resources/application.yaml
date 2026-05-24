@@ -1,0 +1,9 @@
+spring:
+    application:
+        name: learning
+    profiles:
+        active: dev
+server:
+    port: 8080
+
+kind: Application

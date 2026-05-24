@@ -1,0 +1,17 @@
+server:
+    port: 8000
+
+spring:
+    datasource:
+        driverClassName: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/auth_learning
+        username: postgres
+        password: pB278Eu9gJAz
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgresPlusDialect
+                format_sql: true
+        show_sql: true
